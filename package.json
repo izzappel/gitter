@@ -13,6 +13,9 @@
     "type": "git",
     "url": "git+https://github.com/izzappel/gitter.git"
   },
+  "engines": {
+    "electron": "0.36.12"
+  },
   "keywords": [
     "Electron",
     "es6",
