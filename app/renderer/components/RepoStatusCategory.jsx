@@ -10,11 +10,11 @@ export default class RepoStatusCategory extends React.Component {
     return <div className={this.props.className}>
       <ul className="status-category-list">
         {this.props.files.map((item, i) =>
-          <li>{item}</li>
+          <li onDoubleClick={this.props.onFileDoubleClick.bind(this, item)}>{item}</li>
         )}
       </ul>
     </div>;
   }
 }
 
-RepoStatusCategory.propTypes = { files: React.PropTypes.array };
+RepoStatusCategory.propTypes = {files: React.PropTypes.array};

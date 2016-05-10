@@ -17,7 +17,12 @@
   padding: 0;
 
   li {
-    margin: 3px 0;
+    padding: 3px 0;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #ddd;
+    }
   }
 }
 
@@ -25,24 +30,28 @@
   li:before {
     @include state-icon;
     content: "\f040";
+    color: #0000ff;
   }
 }
 .deleted {
   li:before {
     @include state-icon;
     content: "\f068";
+    color: red;
   }
 }
 .added {
   li:before {
     @include state-icon;
     content: "\f067";
+    color: green;
   }
 }
 .untracked {
   li:before {
     @include state-icon;
     content: "\f069";
+    color: #eeee00;
   }
 }
 

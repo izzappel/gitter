@@ -27,27 +27,42 @@ export default class RepoStatusList extends React.Component {
   }
 
   componentDidMount() {
-    gitRepo.status(function (error, result) {
-      console.log(result);
-      this.setState(result);
+    this.updateState();
+  }
+
+  addToIndex(item) {
+    gitRepo.add(item, function(error, result) {
+      this.updateState();
     }.bind(this));
+  }
+
+  removeFromIndex(item) {
+    gitRepo.reset(['HEAD', item], function(error, result) {
+      this.updateState();
+    }.bind(this));
+  }
+
+  updateState() {
+    gitRepo.status((error, result) => {
+      this.setState(result);
+    });
   }
 
   render() {
     return <div className="status-list">
       <div className="worktree">
         <h1>Working Tree</h1>
-        <RepoStatusCategory className="modified" title="Modified" files={this.state.worktree.modified}/>
-        <RepoStatusCategory className="deleted" title="Deleted" files={this.state.worktree.deleted}/>
-        <RepoStatusCategory className="untracked" title="Untracked" files={this.state.worktree.untracked}/>
-        <RepoStatusCategory className="renamed" title="Reanmed" files={this.state.worktree.renamed}/>
+        <RepoStatusCategory className="modified" title="Modified" onFileDoubleClick={(item) => this.addToIndex(item)} files={this.state.worktree.modified}/>
+        <RepoStatusCategory className="deleted" title="Deleted" onFileDoubleClick={(item) => this.addToIndex(item)} files={this.state.worktree.deleted}/>
+        <RepoStatusCategory className="untracked" title="Untracked" onFileDoubleClick={(item) => this.addToIndex(item)} files={this.state.worktree.untracked}/>
+        <RepoStatusCategory className="renamed" title="Reanmed" onFileDoubleClick={(item) => this.addToIndex(item)} files={this.state.worktree.renamed}/>
       </div>
       <div className="index">
         <h1>Index</h1>
-        <RepoStatusCategory className="modified" title="Modified" files={this.state.index.modified}/>
-        <RepoStatusCategory className="deleted" title="Deleted" files={this.state.index.deleted}/>
-        <RepoStatusCategory className="added" title="Added" files={this.state.index.added}/>
-        <RepoStatusCategory className="renamed" title="Reanmed" files={this.state.index.renamed}/>
+        <RepoStatusCategory className="modified" title="Modified"  onFileDoubleClick={(item) => this.removeFromIndex(item)} files={this.state.index.modified}/>
+        <RepoStatusCategory className="deleted" title="Deleted"  onFileDoubleClick={(item) => this.removeFromIndex(item)} files={this.state.index.deleted}/>
+        <RepoStatusCategory className="added" title="Added"  onFileDoubleClick={(item) => this.removeFromIndex(item)} files={this.state.index.added}/>
+        <RepoStatusCategory className="renamed" title="Reanmed"  onFileDoubleClick={(item) => this.removeFromIndex(item)} files={this.state.index.renamed}/>
       </div>
     </div>;
   }
