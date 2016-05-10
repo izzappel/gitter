@@ -3,14 +3,25 @@
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
 
   font-family: sans-serif;
   color: $black;
+  height: 100%;
 }
 
-body {
+html, body {
   font-size: 12px;
+  height: 100%;
+  margin: 0;
+}
+
+#react-root {
+  height: 100%;
+  padding: 10px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 h1 {
