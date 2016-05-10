@@ -1,0 +1,48 @@
+@import 'colors';
+
+@mixin icon {
+  font-family: 'FontAwesome';
+  display: inline-block;
+}
+
+@mixin state-icon {
+  @include icon;
+  color: black;
+  margin-right: 10px;
+}
+
+.status-category-list {
+  list-style-type: none;
+  margin-top: 10px;
+  padding: 0;
+
+  li {
+    margin: 3px 0;
+  }
+}
+
+.modified {
+  li:before {
+    @include state-icon;
+    content: "\f040";
+  }
+}
+.deleted {
+  li:before {
+    @include state-icon;
+    content: "\f068";
+  }
+}
+.added {
+  li:before {
+    @include state-icon;
+    content: "\f067";
+  }
+}
+.untracked {
+  li:before {
+    @include state-icon;
+    content: "\f069";
+  }
+}
+

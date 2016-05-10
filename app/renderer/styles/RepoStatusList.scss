@@ -1,0 +1,21 @@
+@import 'colors';
+
+.status-list {
+  flex-grow: 1;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .index {
+    flex-grow: 1;
+    padding: 10px;
+  }
+
+  .worktree {
+    flex-grow: 1;
+    padding: 10px;
+    border-right: 1px solid black;
+    margin-right: 10px;
+  }
+}
