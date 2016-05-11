@@ -1,8 +1,12 @@
 import React from 'react';
 import './../styles/RepoStatusList.scss';
 import RepoStatusCategory from './RepoStatusCategory';
+var RepoStore = require('../../main/stores/RepoStore');
 var simpleGit = require('../../git/simple-git');
-var gitRepo = simpleGit();
+
+function getRepo() {
+  return simpleGit(RepoStore.getRepo());
+}
 
 export default class RepoStatusList extends React.Component {
   constructor(props) {
@@ -24,26 +28,33 @@ export default class RepoStatusList extends React.Component {
         copied: []
       }
     };
+
+    this.updateState = this.updateState.bind(this);
   }
 
   componentDidMount() {
     this.updateState();
+    RepoStore.addChangeListener(this.updateState);
+  }
+
+  componentWillUnmount() {
+    RepoStore.removeChangeListener(this.updateState);
   }
 
   addToIndex(item) {
-    gitRepo.add(item, function(error, result) {
+    getRepo().add(item, function(error, result) {
       this.updateState();
     }.bind(this));
   }
 
   removeFromIndex(item) {
-    gitRepo.reset(['HEAD', item], function(error, result) {
+    getRepo().reset(['HEAD', item], function(error, result) {
       this.updateState();
     }.bind(this));
   }
 
   updateState() {
-    gitRepo.status((error, result) => {
+    getRepo().status((error, result) => {
       this.setState(result);
     });
   }
