@@ -10,7 +10,6 @@ var png = require("file?name=[name].[ext]!../public/images/GitHub-Mark-32px.png"
 export default class Main extends React.Component {
   render() {
     return (<div className="container">
-        <h1>Gitter</h1>
         <RepoChooser />
         <RepoLog />
         <RepoStatusList />

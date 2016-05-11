@@ -11,6 +11,7 @@ export default class RepoChooser extends React.Component {
     };
 
     this.onDirectoryChoosen = this.onDirectoryChoosen.bind(this);
+    this.onBrowseClick = this.onBrowseClick.bind(this);
   }
 
   onDirectoryChoosen(e) {
@@ -29,10 +30,15 @@ export default class RepoChooser extends React.Component {
     });
   }
 
+  onBrowseClick(e) {
+    document.getElementById('repoDirectoryChooser').click();
+  }
+
   render() {
     return <div className="chooser">
-      <div className="repo">{this.state.repo}</div>
-      <input type="file" name="repoDirectory" onChange={this.onDirectoryChoosen} value={this.state.value}/>
+      <div className="selected-repo">{this.state.repo}</div>
+      <div className="select-repo-button"><button type="button" onClick={this.onBrowseClick}><i className="fa fa-folder-open"></i></button></div>
+      <input type="file" name="repoDirectory" id="repoDirectoryChooser" onChange={this.onDirectoryChoosen} value={this.state.value}/>
     </div>;
   }
 }

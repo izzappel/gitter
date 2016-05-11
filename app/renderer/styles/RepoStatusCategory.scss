@@ -33,6 +33,7 @@
     color: #0000ff;
   }
 }
+
 .deleted {
   li:before {
     @include state-icon;
@@ -40,6 +41,7 @@
     color: red;
   }
 }
+
 .added {
   li:before {
     @include state-icon;
@@ -47,11 +49,20 @@
     color: green;
   }
 }
+
 .untracked {
   li:before {
     @include state-icon;
     content: "\f069";
     color: #ee9900;
+  }
+}
+
+.renamed {
+  li:before {
+    @include state-icon;
+    content: "\f0ec";
+    color: #0000ff;
   }
 }
 
