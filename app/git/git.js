@@ -693,6 +693,22 @@
     });
   };
 
+  Git.prototype.diffWorkingtree = function(filename, then) {
+    var command = ['difftool', '--no-prompt', '--', filename];
+
+    return this._run(command, function (err, data) {
+      then && then(err, data);
+    });
+  };
+
+  Git.prototype.diffIndex = function(filename, then) {
+    var command = ['difftool', '--no-prompt', '--cached', '--', filename];
+
+    return this._run(command, function (err, data) {
+      then && then(err, data);
+    });
+  };
+
   /**
    * rev-parse.
    *
