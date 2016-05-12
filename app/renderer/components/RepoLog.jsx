@@ -1,45 +1,19 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import './../styles/RepoLog.scss';
-var RepoStore = require('../../main/stores/RepoStore');
-var RepoActions = require('../../main/actions/RepoActions');
-var simpleGit = require('../../git/simple-git');
 
-function getRepo() {
-  return simpleGit(RepoStore.getRepo());
+const RepoLog = ({ log }) => {
+  return (
+    <div className="log">
+      <pre>{log}</pre>
+    </div>
+  );
+};
+
+function mapStateToProps(state) {
+  return {
+    log: state.log
+  };
 }
 
-export default class RepoLog extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      log: ''
-    };
-
-    this.updateLog = this.updateLog.bind(this);
-  }
-
-  componentDidMount() {
-    RepoStore.addChangeListener(this.updateLog);
-
-    this.updateLog();
-  }
-
-  componentWillUnmount() {
-    RepoStore.removeChangeListener(this.updateLog);
-  }
-
-  updateLog() {
-    getRepo().myLog((error, result) => {
-      this.setState({
-        log: result
-      })
-    });
-  }
-
-  render() {
-    return <div className="log">
-      <pre>{this.state.log}</pre>
-    </div>;
-  }
-}
+export default connect(mapStateToProps)(RepoLog);

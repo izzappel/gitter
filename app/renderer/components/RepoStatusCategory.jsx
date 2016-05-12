@@ -1,20 +1,22 @@
 import React from 'react';
+import RepoStatusCategoryItem from './RepoStatusCategoryItem';
 import './../styles/RepoStatusCategory.scss';
 
-export default class RepoStatusCategory extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+const RepoStatusCategory = ({className, title, files, onFileDoubleClick}) => (
+  <div className={className}>
+    <ul className="status-category-list">
+      {files.map((item, i) =>
+        <RepoStatusCategoryItem  item={item} onFileDoubleClick={() => onFileDoubleClick(item)} />
+      )}
+    </ul>
+  </div>
+);
 
-  render() {
-    return <div className={this.props.className}>
-      <ul className="status-category-list">
-        {this.props.files.map((item, i) =>
-          <li onDoubleClick={this.props.onFileDoubleClick.bind(this, item)}>{item}</li>
-        )}
-      </ul>
-    </div>;
-  }
-}
+RepoStatusCategory.propTypes = {
+  className: React.PropTypes.string,
+  title: React.PropTypes.string,
+  files: React.PropTypes.array,
+  onFileDoubleClick: React.PropTypes.func.isRequired
+};
 
-RepoStatusCategory.propTypes = {files: React.PropTypes.array};
+export default RepoStatusCategory;
