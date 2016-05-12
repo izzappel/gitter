@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setState } from '../../main/actions/RepoActionCreator';
+import { updateState } from '../../main/actions/RepoActionCreator';
 import RepoStatusCategory from './RepoStatusCategory';
 import './../styles/RepoStatusList.scss';
 var simpleGit = require('../../git/simple-git');
@@ -25,9 +25,7 @@ class RepoStatusList extends React.Component {
   }
 
   updateState() {
-    this.props.repo.status((error, result) => {
-      this.props.dispatch(setState(result));
-    });
+    this.props.dispatch(updateState(this.props.repoDirectory));
   }
 
   render() {
@@ -41,10 +39,10 @@ class RepoStatusList extends React.Component {
       </div>
       <div className="index">
         <h1>Index</h1>
-        <RepoStatusCategory className="modified" title="Modified"  onFileDoubleClick={(item) => this.removeFromIndex(item)} files={this.props.state.index.modified}/>
-        <RepoStatusCategory className="deleted" title="Deleted"  onFileDoubleClick={(item) => this.removeFromIndex(item)} files={this.props.state.index.deleted}/>
-        <RepoStatusCategory className="added" title="Added"  onFileDoubleClick={(item) => this.removeFromIndex(item)} files={this.props.state.index.added}/>
-        <RepoStatusCategory className="renamed" title="Reanmed"  onFileDoubleClick={(item) => this.removeFromIndex(item)} files={this.props.state.index.renamed}/>
+        <RepoStatusCategory className="modified" title="Modified" onFileDoubleClick={(item) => this.removeFromIndex(item)} files={this.props.state.index.modified}/>
+        <RepoStatusCategory className="deleted" title="Deleted" onFileDoubleClick={(item) => this.removeFromIndex(item)} files={this.props.state.index.deleted}/>
+        <RepoStatusCategory className="added" title="Added" onFileDoubleClick={(item) => this.removeFromIndex(item)} files={this.props.state.index.added}/>
+        <RepoStatusCategory className="renamed" title="Reanmed" onFileDoubleClick={(item) => this.removeFromIndex(item)} files={this.props.state.index.renamed}/>
       </div>
     </div>;
   }
@@ -53,6 +51,7 @@ class RepoStatusList extends React.Component {
 function mapStateToProps(state) {
   return {
     repo: simpleGit(state.repo),
+    repoDirectory: state.repo,
     state: state.state
   };
 }

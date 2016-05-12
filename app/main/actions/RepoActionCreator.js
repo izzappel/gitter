@@ -17,6 +17,16 @@ export function changeRepo(directory) {
   };
 }
 
+export function updateState(repo) {
+  return function(dispatch) {
+    var repo = simpleGit(repo);
+
+    repo.status((error, result) => {
+      dispatch(setState(result));
+    });
+  };
+}
+
 function setRepo(directory) {
   return {
     type: SET_REPO,
@@ -24,7 +34,7 @@ function setRepo(directory) {
   };
 }
 
-export function setState(state) {
+function setState(state) {
   return {
     type: SET_STATE,
     state: state
