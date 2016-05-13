@@ -17,18 +17,16 @@
     height: 30px;
   }
 
-  .select-repo-button {
-    button {
-      width: 30px;
-      height: 30px;
-      background-color: #eee;
-      border: 1px solid #eee;
-      font-size: 16px;
+  button {
+    width: 30px;
+    height: 30px;
+    background-color: #eee;
+    border: 1px solid #eee;
+    font-size: 16px;
 
-      &:hover {
-        background-color: #ccc;
-        border: 1px solid black;
-      }
+    &:hover {
+      background-color: #ccc;
+      border: 1px solid black;
     }
   }
 

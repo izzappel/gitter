@@ -41,7 +41,7 @@ class RepoStatusList extends React.Component {
 
   render() {
     return (<div className="status-list">
-      <SplitPane split="vertical"  defaultSize="50%">
+      <SplitPane split="horizontal"  defaultSize="50%">
         <div className="worktree">
           <h1>Working Tree</h1>
           <RepoStatusCategory className="modified" title="Modified" onFileDoubleClick={(item) => this.addToIndex(item)} files={this.props.state.worktree.modified} onDiff={(item) => this.openWorkingTreeDiff(item)}/>

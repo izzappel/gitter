@@ -1,17 +1,17 @@
 @import 'colors';
 
 .status-list {
-  flex: 1;
-  min-height: 500px;
-
-  position: relative;
+  //flex: 1;
+  //min-height: 500px;
+  //
+  //position: relative;
 
   h1 {
     font-weight: normal;
   }
 
   .worktree, .index {
-    margin: 5px;
-    overflow-x: auto;
+    overflow: auto;
+    width: 100%;
   }
 }

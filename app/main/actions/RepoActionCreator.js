@@ -2,7 +2,7 @@ import { SET_REPO, SET_STATE, SET_LOG } from './ActionTypes';
 var simpleGit = require('../../git/simple-git');
 
 export function changeRepo(directory) {
-  return function(dispatch) {
+  return function (dispatch) {
     dispatch(setRepo(directory));
 
     var repo = simpleGit(directory);
@@ -18,11 +18,25 @@ export function changeRepo(directory) {
 }
 
 export function updateState(repo) {
-  return function(dispatch) {
+  return function (dispatch) {
     var repo = simpleGit(repo);
 
     repo.status((error, result) => {
       dispatch(setState(result));
+    });
+  };
+}
+
+export function refreshRepo(repo) {
+  return function (dispatch) {
+    var repo = simpleGit(repo);
+
+    repo.status((error, result) => {
+      dispatch(setState(result));
+    });
+
+    repo.myLog((error, result) => {
+      dispatch(setLog(result));
     });
   };
 }

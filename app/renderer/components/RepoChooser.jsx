@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { changeRepo } from '../../main/actions/RepoActionCreator';
+import { changeRepo, refreshRepo } from '../../main/actions/RepoActionCreator';
 import './../styles/RepoChooser.scss';
 
 class RepoChooser extends React.Component {
@@ -9,6 +9,7 @@ class RepoChooser extends React.Component {
 
     this.onDirectoryChoosen = this.onDirectoryChoosen.bind(this);
     this.onBrowseClick = this.onBrowseClick.bind(this);
+    this.onRefresh = this.onRefresh.bind(this);
   }
 
   onDirectoryChoosen(e) {
@@ -20,6 +21,10 @@ class RepoChooser extends React.Component {
     }
   }
 
+  onRefresh() {
+    this.props.dispatch(refreshRepo(this.props.repo));
+  }
+
   onBrowseClick(e) {
     document.getElementById('repoDirectoryChooser').click();
   }
@@ -27,6 +32,7 @@ class RepoChooser extends React.Component {
   render() {
     return <div className="chooser">
       <div className="selected-repo">{this.props.repo}</div>
+      <div className="reload-repo"><button type="button" onClick={this.onRefresh}><i className="fa fa-refresh"></i></button></div>
       <div className="select-repo-button"><button type="button" onClick={this.onBrowseClick}><i className="fa fa-folder-open"></i></button></div>
       <input type="file" name="repoDirectory" id="repoDirectoryChooser" onChange={this.onDirectoryChoosen}/>
     </div>;
