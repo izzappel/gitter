@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { updateState } from '../../main/actions/RepoActionCreator';
 import RepoStatusCategory from './RepoStatusCategory';
+import SplitPane from 'react-split-pane';
+import './../styles/Splitter.scss';
 
 import './../styles/RepoStatusList.scss';
 var simpleGit = require('../../git/simple-git');
@@ -38,22 +40,24 @@ class RepoStatusList extends React.Component {
   }
 
   render() {
-    return <div className="status-list">
-      <div className="worktree">
-        <h1>Working Tree</h1>
-        <RepoStatusCategory className="modified" title="Modified" onFileDoubleClick={(item) => this.addToIndex(item)} files={this.props.state.worktree.modified} onDiff={(item) => this.openWorkingTreeDiff(item)}/>
-        <RepoStatusCategory className="deleted" title="Deleted" onFileDoubleClick={(item) => this.addToIndex(item)} files={this.props.state.worktree.deleted} onDiff={(item) => this.openWorkingTreeDiff(item)}/>
-        <RepoStatusCategory className="untracked" title="Untracked" onFileDoubleClick={(item) => this.addToIndex(item)} files={this.props.state.worktree.untracked}/>
-        <RepoStatusCategory className="renamed" title="Reanmed" onFileDoubleClick={(item) => this.addToIndex(item)} files={this.props.state.worktree.renamed} onDiff={(item) => this.openWorkingTreeDiff(item)}/>
-      </div>
-      <div className="index">
-        <h1>Index</h1>
-        <RepoStatusCategory className="modified" title="Modified" onFileDoubleClick={(item) => this.removeFromIndex(item)} files={this.props.state.index.modified} onDiff={(item) => this.openIndexDiff(item)}/>
-        <RepoStatusCategory className="deleted" title="Deleted" onFileDoubleClick={(item) => this.removeFromIndex(item)} files={this.props.state.index.deleted} onDiff={(item) => this.openIndexDiff(item)}/>
-        <RepoStatusCategory className="added" title="Added" onFileDoubleClick={(item) => this.removeFromIndex(item)} files={this.props.state.index.added} onDiff={(item) => this.openIndexDiff(item)}/>
-        <RepoStatusCategory className="renamed" title="Reanmed" onFileDoubleClick={(item) => this.removeFromIndex(item)} files={this.props.state.index.renamed} onDiff={(item) => this.openIndexDiff(item)}/>
-      </div>
-    </div>;
+    return (<div className="status-list">
+      <SplitPane split="vertical"  defaultSize="50%">
+        <div className="worktree">
+          <h1>Working Tree</h1>
+          <RepoStatusCategory className="modified" title="Modified" onFileDoubleClick={(item) => this.addToIndex(item)} files={this.props.state.worktree.modified} onDiff={(item) => this.openWorkingTreeDiff(item)}/>
+          <RepoStatusCategory className="deleted" title="Deleted" onFileDoubleClick={(item) => this.addToIndex(item)} files={this.props.state.worktree.deleted} onDiff={(item) => this.openWorkingTreeDiff(item)}/>
+          <RepoStatusCategory className="untracked" title="Untracked" onFileDoubleClick={(item) => this.addToIndex(item)} files={this.props.state.worktree.untracked}/>
+          <RepoStatusCategory className="renamed" title="Reanmed" onFileDoubleClick={(item) => this.addToIndex(item)} files={this.props.state.worktree.renamed} onDiff={(item) => this.openWorkingTreeDiff(item)}/>
+        </div>
+        <div className="index">
+          <h1>Index</h1>
+          <RepoStatusCategory className="modified" title="Modified" onFileDoubleClick={(item) => this.removeFromIndex(item)} files={this.props.state.index.modified} onDiff={(item) => this.openIndexDiff(item)}/>
+          <RepoStatusCategory className="deleted" title="Deleted" onFileDoubleClick={(item) => this.removeFromIndex(item)} files={this.props.state.index.deleted} onDiff={(item) => this.openIndexDiff(item)}/>
+          <RepoStatusCategory className="added" title="Added" onFileDoubleClick={(item) => this.removeFromIndex(item)} files={this.props.state.index.added} onDiff={(item) => this.openIndexDiff(item)}/>
+          <RepoStatusCategory className="renamed" title="Reanmed" onFileDoubleClick={(item) => this.removeFromIndex(item)} files={this.props.state.index.renamed} onDiff={(item) => this.openIndexDiff(item)}/>
+        </div>
+      </SplitPane>
+    </div>);
   }
 }
 
