@@ -17,9 +17,9 @@ export function changeRepo(directory) {
   };
 }
 
-export function updateState(repo) {
+export function updateState(repoDir) {
   return function (dispatch) {
-    var repo = simpleGit(repo);
+    var repo = simpleGit(repoDir);
 
     repo.status((error, result) => {
       dispatch(setState(result));
@@ -27,9 +27,9 @@ export function updateState(repo) {
   };
 }
 
-export function refreshRepo(repo) {
+export function refreshRepo(repoDir) {
   return function (dispatch) {
-    var repo = simpleGit(repo);
+    var repo = simpleGit(repoDir);
 
     repo.status((error, result) => {
       dispatch(setState(result));
