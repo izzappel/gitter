@@ -134,6 +134,18 @@
   };
 
   /**
+   * Checks out one file again from source control. Reverts all pending changes.
+   *
+   * @param {string|string[]} files
+   * @param {Function} [then]
+   */
+  Git.prototype.revertChanges = function (file, then) {
+    return this._run(['checkout', '--', file], function (err, data) {
+      then && then(err);
+    });
+  };
+
+  /**
    * Commits changes in the current working directory - when specific file paths are supplied, only changes on those
    * files will be committed.
    *

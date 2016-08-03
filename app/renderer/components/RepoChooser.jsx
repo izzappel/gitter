@@ -14,7 +14,11 @@ class RepoChooser extends React.Component {
 
   onDirectoryChoosen(e) {
     var value = e.target.files[0].path;
-    var directory = value.match(/(.*)\\(.*\..*)/);
+    
+    var directory = value.match(/(.*)\/(.*\..*)/);
+    if(!directory) {
+	    directory = value.match(/(.*)\\(.*\..*)/); // try for windows
+    }
 
     if (directory && directory[1]) {
       this.props.dispatch(changeRepo(directory[1]));
