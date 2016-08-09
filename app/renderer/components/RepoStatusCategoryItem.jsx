@@ -1,4 +1,5 @@
 import React from 'react';
+import './../styles/RepoStatusCategoryItem.scss';
 
 const {remote} = require('electron');
 const {Menu, MenuItem} = remote;
@@ -11,12 +12,12 @@ const RepoStatusCategoryItem = ({item, onFileDoubleClick, onDiff, onRevert}) => 
 
   if (onDiff) {
     menu.append(new MenuItem({label: 'Diff', click: onDiff}));
-    onDiffClickHandlerButton = <button onClick={onDiff}><i className="fa fa-history"></i></button>;
+    onDiffClickHandlerButton = <button onClick={onDiff} title="Diff" className="status-list-action-button"><i className="fa fa-history"></i></button>;
   }
 
   if(onRevert) {
     menu.append(new MenuItem({label: 'Revert', click: onRevert}));
-    onRevertClickHanlderButton = <button onClick={onRevert}><i className="fa fa-undo"></i></button>;
+    onRevertClickHanlderButton = <button onClick={onRevert} title="Revert" className="status-list-action-button"><i className="fa fa-undo"></i></button>;
   }
   
   return (
